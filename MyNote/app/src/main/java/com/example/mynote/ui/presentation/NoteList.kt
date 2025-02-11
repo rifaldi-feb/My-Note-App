@@ -8,24 +8,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mynote.model.Note
 import com.example.mynote.model.value
 import com.example.mynote.ui.theme.MyNoteTheme
-import kotlin.random.Random
+
 
 @Composable
-fun NoteList(notes : List<Note>,modifier: Modifier = Modifier){
-
+fun NoteList(notes : List<Note>,modifier: Modifier = Modifier, navController : NavController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -36,12 +34,12 @@ fun NoteList(notes : List<Note>,modifier: Modifier = Modifier){
             modifier = Modifier.fillMaxSize()
         ){
             items(notes){ note->
-                NoteItem(note.title,note.description)
+                NoteItem(note.title,note.description, navController)
             }
         }
         FloatingActionButton(
             onClick = {
-
+                navController.navigate("add")
             },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -53,10 +51,10 @@ fun NoteList(notes : List<Note>,modifier: Modifier = Modifier){
     }
 }
 
-@Composable
-@PreviewLightDark
-fun NoteListPreview(){
-    MyNoteTheme {
-        NoteList(value)
-    }
-}
+//@Composable
+//@Preview
+//fun NoteListPreview(navController: NavController){
+//    MyNoteTheme  {
+//        NoteList(value, modifier = Modifier,navController)
+//    }
+//}

@@ -1,6 +1,7 @@
 package com.example.mynote.ui.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,11 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.mynote.ui.theme.MyNoteTheme
 import kotlin.random.Random
 
 @Composable
-fun NoteItem(title : String , description : String){
+fun NoteItem(title : String , description : String, navController : NavController){
+
     val randomColor = Color(
         red = Random.nextFloat(),
         green = Random.nextFloat(),
@@ -39,6 +43,9 @@ fun NoteItem(title : String , description : String){
             .padding(8.dp)
             .background(color = randomColor)
             .fillMaxWidth()
+            .clickable{
+                navController.navigate("add")
+            },
 
     ){
         Column (
@@ -61,10 +68,10 @@ fun NoteItem(title : String , description : String){
     }
 }
 
-@Composable
-@PreviewLightDark
-fun NoteItemPreview(){
-    MyNoteTheme {
-        NoteItem("mau makan bareng", "makan bareng client jam 10 pagi")
-    }
-}
+//@Composable
+//@PreviewLightDark
+//fun NoteItemPreview(){
+//    MyNoteTheme {
+//        NoteItem("mau makan bareng", "makan bareng client jam 10 pagi")
+//    }
+//}
